@@ -7,19 +7,13 @@ import { CartItem } from '../../models/cartItem';
   imports: [],
   templateUrl: './cart.component.html'
 })
-export class CartComponent implements OnChanges {
+export class CartComponent {
   
-  @Input() items: CartItem[] = [];
+  items: CartItem[] = [];
 
   total = 0;
   
-  @Output() idProductEventEmitter = new EventEmitter();
-  
-  ngOnChanges(changes: SimpleChanges): void {
-    // let itemsChanges = changes['items'];
-    this.calculateTotal();
-    this.saveSession();
-  }
+  idProductEventEmitter = new EventEmitter();
 
   onDeleteCart(id: number) {
     this.idProductEventEmitter.emit(id);

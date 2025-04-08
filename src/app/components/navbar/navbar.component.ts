@@ -11,9 +11,4 @@ export class NavbarComponent {
 
   @Input() items: CartItem[] = [];
 
-  @Output() openEventEmitter = new EventEmitter();
-
-  openCart(): void{
-    this.openEventEmitter.emit();
-  }
 }

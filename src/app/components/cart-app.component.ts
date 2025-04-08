@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from '../models/product';
 import { CatalogComponent } from './catalog/catalog.component';
-import { CartModalComponent } from './cart-modal/cart-modal.component';
 import { CartItem } from '../models/cartItem';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'cart-app',
   standalone: true,
-  imports: [CatalogComponent, CartModalComponent, NavbarComponent],
+  imports: [CatalogComponent, NavbarComponent],
   templateUrl: './cart-app.component.html'
 })
 export class CartAppComponent implements OnInit {
@@ -18,9 +17,9 @@ export class CartAppComponent implements OnInit {
 
   items: CartItem[] = [];
 
-  // total: number = 0;
+  total: number = 0;
 
-  showCart: boolean = false;
+  //showCart: boolean = false;
 
   constructor(private service: ProductService) {}
 
@@ -60,15 +59,12 @@ export class CartAppComponent implements OnInit {
     // this.saveSession();
   }
 
-  // calculateTotal(): void {
-  //   this.total = this.items.reduce((accumulator, item) => accumulator + item.quantity * item.product.price, 0);
-  // }
-
-  // saveSession(): void{
-  //   sessionStorage.setItem('cart', JSON.stringify(this.items));
-  // }
-
-  openCloseCart(): void{
-    this.showCart = !this.showCart;
+  calculateTotal(): void {
+     this.total = this.items.reduce((accumulator, item) => accumulator + item.quantity * item.product.price, 0);
   }
+
+  saveSession(): void{
+     sessionStorage.setItem('cart', JSON.stringify(this.items));
+  }
+
 }
